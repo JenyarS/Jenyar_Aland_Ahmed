@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class Jenyar_Aland_Ahmed {
     static Scanner input = new Scanner(System.in);
     // counter array to store how many participants in each event/category
@@ -53,13 +54,13 @@ public class Jenyar_Aland_Ahmed {
     } // end of menu
 
     public static void viewEvents(){
-
         for (int i = 0; i < category.length; i++){
             System.out.println((i+1) + ". " + category[i]);
         }
         System.out.print("Select a category: ");
 
         int catChoice = validateRange(1, 3) - 1;
+        if (catChoice == -1) return;
 
         for (int i = 0; i < events[0].length; i++){
             System.out.println((i+1) + ". " + events[catChoice][i]);
@@ -74,10 +75,10 @@ public class Jenyar_Aland_Ahmed {
         do {
             if (tries == 0) {
                 System.out.println("Too many failed attempts.");
-                // ADD A WAY TO EXIT
+                return 0;
             }
             if (error){
-                System.out.println("Invalid choice, try again.");
+                System.out.print("Invalid choice, try again: ");
             }
             num = input.nextInt();
             error = true;
@@ -85,6 +86,5 @@ public class Jenyar_Aland_Ahmed {
             System.out.println();
         }while (num < min || num > max);
         return num;
-
     } // end of validateRange
 }
