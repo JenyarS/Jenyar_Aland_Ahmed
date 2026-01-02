@@ -4,6 +4,7 @@ public class Jenyar_Aland_Ahmed {
 
     public static void main(String[] args){
         int choice = menu();
+        System.out.println("Choice is yet to be implemented");
     } // end of main
 
     public static int menu(){
