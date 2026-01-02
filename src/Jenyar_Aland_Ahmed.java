@@ -50,35 +50,41 @@ public class Jenyar_Aland_Ahmed {
         );
         System.out.print("What would you like to do? ");
         return input.nextInt();
-    }
+    } // end of menu
 
     public static void viewEvents(){
-        int catChoice;
-        boolean error = false;
-        int tries = 3;
 
         for (int i = 0; i < category.length; i++){
             System.out.println((i+1) + ". " + category[i]);
         }
         System.out.print("Select a category: ");
 
-        do {
-            if (tries == 0) {
-                System.out.println("Too many failed attempts.");
-                return;
-            }
-            if (error){
-                System.out.println("Invalid choice, try again.");
-            }
-            catChoice = input.nextInt() - 1;
-            error = true;
-            tries--;
-            System.out.println();
-        }while (catChoice < 0 || catChoice > 2);
+        int catChoice = validateRange(1, 3) - 1;
 
         for (int i = 0; i < events[0].length; i++){
             System.out.println((i+1) + ". " + events[catChoice][i]);
         }
         System.out.println();
-    }
+    } // end of viewEvents
+
+    public static int validateRange(int min, int max){
+        int num;
+        boolean error = false;
+        int tries = 3;
+        do {
+            if (tries == 0) {
+                System.out.println("Too many failed attempts.");
+                // ADD A WAY TO EXIT
+            }
+            if (error){
+                System.out.println("Invalid choice, try again.");
+            }
+            num = input.nextInt();
+            error = true;
+            tries--;
+            System.out.println();
+        }while (num < min || num > max);
+        return num;
+
+    } // end of validateRange
 }
