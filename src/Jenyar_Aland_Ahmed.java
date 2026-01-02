@@ -6,25 +6,28 @@ public class Jenyar_Aland_Ahmed {
     // single dimension array to store the categories
     static String[] category = {"Music", "Art Exhibitions", "Literature & Poetry"};
     // two dimension array to store the events as [category][event]
-    static String[][] event = {
+    static String[][] events = {
             {"Zagros Mountain Melodies", "Golden Daf Rhythms", "Hewler Folk Night", "Slemani Strings Festival"},
             {"Colors of the Citadel", "Modern Kurdish Canvas", "Heritage Textile Showcase", "Landscapes of Spring"},
             {"Echoes of Nali", "Contemporary Kurdish Voices", "Legends of the Ancients", "The Poets' Circle"}
     };
 
-
     public static void main(String[] args){
+        for (;;) {
+            int choice = menu();
+            System.out.println();
 
-        int choice = menu();
+            switch (choice) {
+                case 0 -> {
+                    System.out.println("Exiting.");
+                    System.exit(0);
+                } // exit
 
-        switch (choice){
-            case 0 ->{
-                System.out.println("Exiting.");
-                System.exit(0);
-            } // exit
+                case 1 -> viewEvents();
 
-            default -> {
-                System.out.println("Choice is yet to be implemented");
+                default -> {
+                    System.out.println("Choice is yet to be implemented");
+                }
             }
         }
     } // end of main
@@ -47,5 +50,35 @@ public class Jenyar_Aland_Ahmed {
         );
         System.out.print("What would you like to do? ");
         return input.nextInt();
+    }
+
+    public static void viewEvents(){
+        int catChoice;
+        boolean error = false;
+        int tries = 3;
+
+        for (int i = 0; i < category.length; i++){
+            System.out.println((i+1) + ". " + category[i]);
+        }
+        System.out.print("Select a category: ");
+
+        do {
+            if (tries == 0) {
+                System.out.println("Too many failed attempts.");
+                return;
+            }
+            if (error){
+                System.out.println("Invalid choice, try again.");
+            }
+            catChoice = input.nextInt() - 1;
+            error = true;
+            tries--;
+            System.out.println();
+        }while (catChoice < 0 || catChoice > 2);
+
+        for (int i = 0; i < events[0].length; i++){
+            System.out.println((i+1) + ". " + events[catChoice][i]);
+        }
+        System.out.println();
     }
 }
