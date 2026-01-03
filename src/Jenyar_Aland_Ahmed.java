@@ -42,8 +42,11 @@ public class Jenyar_Aland_Ahmed {
 
                 case 3 -> cancelRegistration();
 
+                case 4 -> displayParticipants();
 
                 case 5 -> displaystats();
+
+                case 6 -> searchParticipant();
 
 
                 default -> {
@@ -60,14 +63,14 @@ public class Jenyar_Aland_Ahmed {
 
         System.out.println(
                 "1. View Events\n" +
-                "2. Register for an event\n" +
-                "3. Cancel Registration\n" +
-                "4. Display all Participants\n" +
-                "5. Display Number of Participants\n" +
-                "6. Search for a Participant\n" +
-                "7. Lastest Registrations\n" +
-                "8. Popularity Report\n" +
-                "0. Exit\n"
+                        "2. Register for an event\n" +
+                        "3. Cancel Registration\n" +
+                        "4. Display all Participants\n" +
+                        "5. Display Number of Participants\n" +
+                        "6. Search for a Participant\n" +
+                        "7. Lastest Registrations\n" +
+                        "8. Popularity Report\n" +
+                        "0. Exit\n"
         );
         System.out.print("What would you like to do? ");
         return validateInt(input);
@@ -228,6 +231,38 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.println();
     } // end of cancel registration
+
+    public static void displayParticipants(){
+        System.out.println("1. Display in ascending order");
+        System.out.println("2. Display in descending order");
+        System.out.println("How would you like the participants: ");
+        int choice = validateRange(1, 2);
+        if (choice == 0) return;
+
+        for (int cat = 0; cat < registrations.length; cat++){
+            System.out.println((cat+1) + ". " + category[cat]);
+            for (int event = 0; event < registrations[0].length; event++){
+                int counter = 1;
+                ArrayList<String> participants = sort(cat, event, choice);
+                System.out.println("    " + (cat+1) + "." + (event+1) + ". " + events[cat][event]);
+                for (String participant: participants){
+                    System.out.println("        " + (cat+1) + "." + (event+1) + "." + counter + ". " + participant);
+                    counter++;
+                }
+            }
+        }
+    } // end of displayParticipants
+
+    public static ArrayList<String> sort(int category, int event, int pattern){
+        // create a copy list of the names in the current event
+        ArrayList<String> participants = new ArrayList<>(registrations[category][event]);
+        if (pattern == 1){
+            Collections.sort(participants);
+        } else{
+            Collections.sort(participants, Collections.reverseOrder());
+        }
+        return participants;
+    } // end of sort
     // method to display stats
     public static void displaystats(){
         System.out.println("~~~~~~ display stats ~~~~~~");
@@ -242,4 +277,83 @@ public class Jenyar_Aland_Ahmed {
             System.out.println("total for " + category[i] + ":" + totcategory);
         }
     }
+    // Search for a Participant
+// Can search by participant name or ID
+    public static void searchParticipant(){
+        // choose how to search
+        System.out.println("Search for a Participant");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Search by:");
+        System.out.println("1. Name");
+        System.out.println("2. ID");
+        System.out.print("Your choice: ");
+        int searchChoice = validateRange(1, 2);
+        if (searchChoice == 0) return;
+
+        System.out.println();
+        String searchValue = "";
+        if (searchChoice == 1){
+            System.out.print("Enter participant name: ");
+            searchValue = input.nextLine().trim();
+        } else {
+            System.out.print("Enter participant ID: ");
+            int idNum = validateInt(input);
+            input.nextLine();
+            searchValue = String.valueOf(idNum);
+        }
+
+        System.out.println("Searching for: " + searchValue);
+        System.out.println();
+
+        // counter to see how many events they are in
+        int foundCount = 0;
+
+        // loop through categories
+        for (int i = 0; i < category.length; i++){
+            // loop through events in the category
+            for (int j = 0; j < events[i].length; j++){
+                // show participants for the event
+                ArrayList<String> eventList = registrations[i][j];
+
+                // search through all participants in the event
+                for (int k = 0; k < eventList.size(); k++){
+                    String participant = eventList.get(k);
+                    String[] parts = participant.split("&");
+                    String name = parts[0];
+                    String id = parts[1];
+
+                    // check if this participant matches our search
+                    boolean matches = false;
+                    if (searchChoice == 1){
+                        // searching by name case insensitive
+                        if (name.equalsIgnoreCase(searchValue)){
+                            matches = true;
+                        }
+                    } else {
+                        // searching by ID
+                        if (id.equals(searchValue)){
+                            matches = true;
+                        }
+                    }
+
+                    // if match found
+                    if (matches){
+                        foundCount++;
+                        System.out.println("Found in:");
+                        System.out.println("Category: " + category[i]);
+                        System.out.println("Event: " + events[i][j]);
+                        System.out.println("Participant: " + name + " (ID: " + id + ")");
+                        System.out.println();
+                    }
+                }
+            }
+        }
+        // display results summary
+        if (foundCount == 0){
+            System.out.println("Participant not found in any events! ");
+        } else {
+            System.out.println("Total events registered: " + foundCount);
+        }
+        System.out.println();
+    } // end of search participant
 }
