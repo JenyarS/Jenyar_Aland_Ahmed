@@ -87,7 +87,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.print("Select a category: ");
 
         int catChoice = validateRange(1, 3) - 1;
-        if (catChoice == -1) return;
+        if (catChoice < 0) return;
 
         System.out.println();
         System.out.println("Current Events:");
@@ -110,23 +110,26 @@ public class Jenyar_Aland_Ahmed {
     // method to validate the input integer fits withing the acceptable range
     public static int validateRange(int min, int max){
         int num;
-        boolean error = false;
         int tries = 3;
-        do {
-            if (tries == 0) {
-                System.out.println("Too many failed attempts.");
-                return 0;
-            }
-            if (error){
-                System.out.print("Invalid choice, try again: ");
-            }
+
+        while (tries > 0) {
             num = validateInt(input);
             input.nextLine(); // consume newline
-            error = true;
+
+            if (num >= min && num <= max) {
+                System.out.println();
+                return num;
+            }
+
             tries--;
             System.out.println();
-        }while (num < min || num > max);
-        return num;
+            if (tries > 0) {
+                System.out.print("Invalid choice, try again: ");
+            }
+        }
+
+        System.out.println("Too many failed attempts.");
+        return -1; // Return -1 for failure
     } // end of validateRange
 
     public static void register(){
@@ -136,7 +139,7 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.print("Select a category: ");
         int catChoice = validateRange(1, 3) - 1;
-        if (catChoice == -1) return;
+        if (catChoice < 0) return;
 
         // display events
         System.out.println();
@@ -145,7 +148,7 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.print("Select an event: ");
         int eventChoice = validateRange(1, 4) - 1;
-        if (eventChoice == -1) return;
+        if (eventChoice < 0) return;
 
         System.out.println();
         System.out.print("Enter the participants name: ");
@@ -176,7 +179,7 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.print("Select a category: ");
         int catChoice = validateRange(1, 3) - 1;
-        if (catChoice == -1) return;
+        if (catChoice < 0) return;
 
         System.out.println();
         // show event in category
@@ -185,7 +188,7 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.print("Select an event: ");
         int eventChoice = validateRange(1, 4) - 1;
-        if (eventChoice == -1) return;
+        if (eventChoice < 0) return;
 
         System.out.println();
         System.out.println("Search by:");
@@ -193,7 +196,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println("2. ID");
         System.out.print("Your choice: ");
         int searchChoice = validateRange(1, 2);
-        if (searchChoice == 0) return;
+        if (searchChoice < 0) return;
 
         System.out.println();
         String searchValue = "";
@@ -248,9 +251,9 @@ public class Jenyar_Aland_Ahmed {
     public static void displayParticipants(){
         System.out.println("1. Display in ascending order");
         System.out.println("2. Display in descending order");
-        System.out.println("How would you like the participants: ");
+        System.out.println("How would you like the participants displayed: ");
         int choice = validateRange(1, 2);
-        if (choice == 0) return;
+        if (choice < 0) return;
 
         for (int cat = 0; cat < registrations.length; cat++){
             System.out.println((cat+1) + ". " + category[cat]);
@@ -310,7 +313,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println("2. ID");
         System.out.print("Your choice: ");
         int searchChoice = validateRange(1, 2);
-        if (searchChoice == 0) return;
+        if (searchChoice < 0) return;
 
         System.out.println();
         String searchValue = "";
@@ -411,6 +414,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println("~~~~~~ Latest Registration ~~~~~~");
         if (latestregistration.isEmpty()){
             System.out.println("registration is empty");
+            System.out.println();
         }else {
             for (int i=latestregistration.size()-1;i>=0;i--){
                 System.out.println(latestregistration.get(i));
