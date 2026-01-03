@@ -258,10 +258,14 @@ public class Jenyar_Aland_Ahmed {
                 int counter = 1;
                 ArrayList<String> participants = sort(cat, event, choice);
                 System.out.println("    " + (cat+1) + "." + (event+1) + ". " + events[cat][event]);
-                for (String participant: participants){
-                    String[] parts = participant.split("-");
-                    System.out.println("        " + (cat+1) + "." + (event+1) + "." + counter + ". Name: " + parts[0] + ", ID: " + parts[1]);
-                    counter++;
+                if (participants.isEmpty()) {
+                    System.out.println("        No participants registered for this event.");
+                } else {
+                    for (String participant : participants) {
+                        String[] parts = participant.split("-");
+                        System.out.println("        " + (cat + 1) + "." + (event + 1) + "." + counter + ". Name: " + parts[0] + ", ID: " + parts[1]);
+                        counter++;
+                    }
                 }
             }
         }
