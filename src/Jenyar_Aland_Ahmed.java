@@ -2,8 +2,6 @@ import java.util.*;
 
 public class Jenyar_Aland_Ahmed {
     static Scanner input = new Scanner(System.in);
-    // counter array to store how many participants in each event/category
-    static int[][] eventCounts = new int[3][4];
     // single dimension array to store the categories
     static String[] category = {"Music", "Art Exhibitions", "Literature & Poetry"};
     // two dimension array to store the events as [category][event]
