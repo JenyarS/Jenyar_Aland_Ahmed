@@ -420,5 +420,6 @@ public class Jenyar_Aland_Ahmed {
                 System.out.println(latestregistration.get(i));
             }
         }
+        System.out.println();
     }
 }
