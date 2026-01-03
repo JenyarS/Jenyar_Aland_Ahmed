@@ -24,6 +24,7 @@ public class Jenyar_Aland_Ahmed {
     } // end of initializeSystem
 
     public static void main(String[] args){
+        initializeSystem();
         for (;;) {
             int choice = menu();
             System.out.println();
@@ -115,5 +116,5 @@ public class Jenyar_Aland_Ahmed {
         System.out.println("Select an event:");
         int eventChoice = validateRange(1, 4) - 1;
         if (eventChoice == -1) return;
-    }
+    } // end of registrations
 }
