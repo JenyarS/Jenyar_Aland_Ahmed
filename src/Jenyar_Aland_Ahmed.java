@@ -72,7 +72,7 @@ public class Jenyar_Aland_Ahmed {
                 "4. Display all Participants\n" +
                 "5. Display Number of Participants\n" +
                 "6. Search for a Participant\n" +
-                "7. Lastest Registrations\n" +
+                "7. Latest Registrations\n" +
                 "8. Popularity Report\n" +
                 "0. Exit\n"
         );
