@@ -157,6 +157,10 @@ public class Jenyar_Aland_Ahmed {
         // this saves the name and ID together as name&id
         // which can later be split for searching
         String combined = name + "-" + ID;
+        if (registrations[catChoice][eventChoice].contains(combined)) {
+            System.out.println("Participant already registered for this event.");
+            return;
+        }
         registrations[catChoice][eventChoice].add(combined);
 
         //these lines are added for case 7
