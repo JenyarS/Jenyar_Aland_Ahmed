@@ -151,7 +151,7 @@ public class Jenyar_Aland_Ahmed {
 
         // this saves the name and ID together as name&id
         // which can later be split for searching
-        String combined = name + "&" + ID;
+        String combined = name + "-" + ID;
         registrations[catChoice][eventChoice].add(combined);
     } // end of registrations
 
@@ -199,7 +199,7 @@ public class Jenyar_Aland_Ahmed {
 
         for (int i = 0; i < eventList.size(); i++){
             String participant = eventList.get(i);
-            String[] parts = participant.split("&");
+            String[] parts = participant.split("-");
             String name = parts[0];
             String id = parts[1];
 
@@ -250,6 +250,7 @@ public class Jenyar_Aland_Ahmed {
                 }
             }
         }
+        System.out.println();
     } // end of displayParticipants
 
     // sorting method
@@ -277,6 +278,7 @@ public class Jenyar_Aland_Ahmed {
             }
             System.out.println("total for " + category[i] + ":" + totcategory);
         }
+        System.out.println();
     } // end of displayStats
 
     // Can search by participant name or ID
@@ -319,7 +321,7 @@ public class Jenyar_Aland_Ahmed {
                 // search through all participants in the event
                 for (int k = 0; k < eventList.size(); k++){
                     String participant = eventList.get(k);
-                    String[] parts = participant.split("&");
+                    String[] parts = participant.split("-");
                     String name = parts[0];
                     String id = parts[1];
 
