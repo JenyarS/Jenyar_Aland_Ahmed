@@ -1,3 +1,20 @@
+/*
+  Project: Cultural Events Registration System
+  Course: Data Structures and Algorithms (CSE202)
+  Date: January 3, 2026
+
+  Team Members:
+  1. Name: [Jenyar Saman Qadir] - ID: [01-24-00478] - Major: [SES1] - Contribution: [I was responsible for the initial foundation, choices 1,2,4 and 8.
+                                                                                    However the whole team helped each other with reviews and error-checking]
+
+  2. Name: [Aland Seerwan Ismael] - ID: [01-24-00492] - Major: [SES1] - Contribution: [ Implemented Requirement 5 (Statistics) and Requirement 7 (Latest Registrations).
+                                                                                      Handled method testing and optimized the overall code structure]
+
+  3. Name: [Ahmed Jawdat Jaafer] - ID: [01-24-00615] - Major: [SES1] - Contribution: [I was responsible for the cancelation of registrars of the events and search for participants portion,
+                                                                                     but at the same time we all worked together over the whole code to make refinements, debugging,
+                                                                                     and ensuring compatibility across all methods.]
+ */
+
 import java.util.*;
 
 public class Jenyar_Aland_Ahmed {
