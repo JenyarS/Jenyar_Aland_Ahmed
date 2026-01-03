@@ -289,25 +289,24 @@ public class Jenyar_Aland_Ahmed {
 
     // method to display stats
     public static void displayStats(){
-        System.out.println("~~~~~~ display stats ~~~~~~");
+        System.out.println("~~~~~~ Display Stats ~~~~~~");
         for (int i=0;i<category.length;i++){
-            System.out.println("category: " + category[i]);
+            System.out.println("Category: " + category[i]);
             int totcategory=0;// tracking the total number of registrations in current category
             for (int j=0;j<events[i].length;j++){
                 int totevent=registrations[i][j].size();
                 totcategory+=totevent;
-                System.out.println(events[i][j]+": " + totevent + " participants");
+                System.out.println("  " + events[i][j]+": " + totevent + " participants");
             }
-            System.out.println("total for " + category[i] + ":" + totcategory);
+            System.out.println("Total for " + category[i] + ": " + totcategory);
+            System.out.println();
         }
-        System.out.println();
     } // end of displayStats
 
     // Can search by participant name or ID
     public static void searchParticipant(){
         // choose how to search
-        System.out.println("Search for a Participant");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~ Search for a Participant ~~~~~~");
         System.out.println("Search by:");
         System.out.println("1. Name");
         System.out.println("2. ID");
@@ -365,9 +364,9 @@ public class Jenyar_Aland_Ahmed {
                     if (matches){
                         foundCount++;
                         System.out.println("Found in:");
-                        System.out.println("Category: " + category[i]);
-                        System.out.println("Event: " + events[i][j]);
-                        System.out.println("Participant: " + name + " (ID: " + id + ")");
+                        System.out.println("  Category: " + category[i]);
+                        System.out.println("  Event: " + events[i][j]);
+                        System.out.println("  Participant: " + name + " (ID: " + id + ")");
                         System.out.println();
                     }
                 }
@@ -375,7 +374,7 @@ public class Jenyar_Aland_Ahmed {
         }
         // display results summary
         if (foundCount == 0){
-            System.out.println("Participant not found in any events! ");
+            System.out.println("Participant not found in any events.");
         } else {
             System.out.println("Total events registered: " + foundCount);
         }
@@ -384,6 +383,7 @@ public class Jenyar_Aland_Ahmed {
 
     // generates a report of popularity
     public static void report(){
+        System.out.println("~~~~~~ Popularity Report ~~~~~~");
         int mostCat = 0;
         int catIndex = 0;
         int mostEvent = 0;
@@ -406,20 +406,20 @@ public class Jenyar_Aland_Ahmed {
         }
 
         System.out.println("The most popular category is '" + category[catIndex] + "' with " + mostCat + " participants.");
-        System.out.println("And the most popular event is '" + events[eventIndex[0]][eventIndex[1]] + "' with " + mostEvent + " participants." );
+        System.out.println("The most popular event is '" + events[eventIndex[0]][eventIndex[1]] + "' with " + mostEvent + " participants." );
         System.out.println();
     } // end of report
+
     // method to display the latest entries made first
     public static void latestRegistration() {
-        System.out.println("~~~~~~ Latest Registration ~~~~~~");
+        System.out.println("~~~~~~ Latest Registrations ~~~~~~");
         if (latestregistration.isEmpty()){
-            System.out.println("registration is empty");
-            System.out.println();
+            System.out.println("No registrations yet.");
         }else {
             for (int i=latestregistration.size()-1;i>=0;i--){
                 System.out.println(latestregistration.get(i));
             }
         }
         System.out.println();
-    }
+    } // end of latestRegistrations
 }
