@@ -13,6 +13,7 @@ public class Jenyar_Aland_Ahmed {
     // arraylist to store the participant information
     static ArrayList<String>[][] registrations = new ArrayList[3][4];
     static ArrayList<String> latestregistration = new ArrayList<>();
+    static ArrayList<String> participantEventCount = new ArrayList<>();
 
     // we need this method to initialize the arraylist
     public static void initializeSystem(){
@@ -166,9 +167,28 @@ public class Jenyar_Aland_Ahmed {
         }
         registrations[catChoice][eventChoice].add(combined);
 
+        // track how many events this participant registered for
+        participantEventCount.add(combined);
+
+        // count total registrations for this participant
+        int count = 0;
+        for (int i = 0; i < participantEventCount.size(); i++){
+            if (participantEventCount.get(i).equals(combined)){
+                count++;
+            }
+        }
+
         //these lines are added for case 7
         latestregistration.add("Name: " + name + ", ID: " + ID + ", Event: " + events[catChoice][eventChoice]);
         System.out.println("Registration is completed");
+
+        // if registered for more than 2 events generate code
+        if (count > 2){
+            int code = (int)(Math.random() * 900000) + 100000;
+            System.out.println("Congratulations! You are eligible for a cultural gift!");
+            System.out.println("Your confirmation code is: " + code);
+        }
+
         System.out.println();
     } // end of registrations
 
