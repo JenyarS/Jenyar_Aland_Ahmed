@@ -44,11 +44,12 @@ public class Jenyar_Aland_Ahmed {
 
                 case 4 -> displayParticipants();
 
-                case 5 -> displaystats();
+                case 5 -> displayStats();
 
+                case 6 -> searchParticipant();
 
                 default -> {
-                    System.out.println("Choice is yet to be implemented");
+                    System.out.println("Invalid choice.");
                 }
             }
         }
@@ -251,6 +252,7 @@ public class Jenyar_Aland_Ahmed {
         }
     } // end of displayParticipants
 
+    // sorting method
     public static ArrayList<String> sort(int category, int event, int pattern){
         // create a copy list of the names in the current event
         ArrayList<String> participants = new ArrayList<>(registrations[category][event]);
@@ -261,8 +263,9 @@ public class Jenyar_Aland_Ahmed {
         }
         return participants;
     } // end of sort
+
     // method to display stats
-    public static void displaystats(){
+    public static void displayStats(){
         System.out.println("~~~~~~ display stats ~~~~~~");
         for (int i=0;i<category.length;i++){
             System.out.println("category: " + category[i]);
@@ -274,5 +277,84 @@ public class Jenyar_Aland_Ahmed {
             }
             System.out.println("total for " + category[i] + ":" + totcategory);
         }
-    }
+    } // end of displayStats
+
+    // Can search by participant name or ID
+    public static void searchParticipant(){
+        // choose how to search
+        System.out.println("Search for a Participant");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Search by:");
+        System.out.println("1. Name");
+        System.out.println("2. ID");
+        System.out.print("Your choice: ");
+        int searchChoice = validateRange(1, 2);
+        if (searchChoice == 0) return;
+
+        System.out.println();
+        String searchValue = "";
+        if (searchChoice == 1){
+            System.out.print("Enter participant name: ");
+            searchValue = input.nextLine().trim();
+        } else {
+            System.out.print("Enter participant ID: ");
+            int idNum = validateInt(input);
+            input.nextLine();
+            searchValue = String.valueOf(idNum);
+        }
+
+        System.out.println("Searching for: " + searchValue);
+        System.out.println();
+
+        // counter to see how many events they are in
+        int foundCount = 0;
+
+        // loop through categories
+        for (int i = 0; i < category.length; i++){
+            // loop through events in the category
+            for (int j = 0; j < events[i].length; j++){
+                // show participants for the event
+                ArrayList<String> eventList = registrations[i][j];
+
+                // search through all participants in the event
+                for (int k = 0; k < eventList.size(); k++){
+                    String participant = eventList.get(k);
+                    String[] parts = participant.split("&");
+                    String name = parts[0];
+                    String id = parts[1];
+
+                    // check if this participant matches our search
+                    boolean matches = false;
+                    if (searchChoice == 1){
+                        // searching by name case insensitive
+                        if (name.equalsIgnoreCase(searchValue)){
+                            matches = true;
+                        }
+                    } else {
+                        // searching by ID
+                        if (id.equals(searchValue)){
+                            matches = true;
+                        }
+                    }
+
+                    // if match found
+                    if (matches){
+                        foundCount++;
+                        System.out.println("Found in:");
+                        System.out.println("Category: " + category[i]);
+                        System.out.println("Event: " + events[i][j]);
+                        System.out.println("Participant: " + name + " (ID: " + id + ")");
+                        System.out.println();
+                    }
+                }
+            }
+        }
+        // display results summary
+        if (foundCount == 0){
+            System.out.println("Participant not found in any events! ");
+        } else {
+            System.out.println("Total events registered: " + foundCount);
+        }
+        System.out.println();
+    } // end of search participant
 }
