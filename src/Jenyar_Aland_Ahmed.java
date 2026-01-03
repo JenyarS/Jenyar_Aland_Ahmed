@@ -40,6 +40,8 @@ public class Jenyar_Aland_Ahmed {
 
                 case 2 -> register();
 
+                case 3 -> cancelRegistration();
+
                 default -> {
                     System.out.println("Choice is yet to be implemented");
                 }
@@ -152,4 +154,80 @@ public class Jenyar_Aland_Ahmed {
         String combined = name + "&" + ID;
         registrations[catChoice][eventChoice].add(combined);
     } // end of registrations
+
+    // method to cancel registration
+    public static void cancelRegistration(){
+        for (int i = 0; i < category.length; i++){
+            System.out.println((i+1) + ". " + category[i]);
+        }
+        System.out.print("Select a category: ");
+        int catChoice = validateRange(1, 3) - 1;
+        if (catChoice == -1) return;
+
+        System.out.println();
+        // show event in category
+        for (int i = 0; i < events[0].length; i++){
+            System.out.println((i+1) + ". " + events[catChoice][i]);
+        }
+        System.out.print("Select an event: ");
+        int eventChoice = validateRange(1, 4) - 1;
+        if (eventChoice == -1) return;
+
+        System.out.println();
+        System.out.println("Search by:");
+        System.out.println("1. Name");
+        System.out.println("2. ID");
+        System.out.print("Your choice: ");
+        int searchChoice = validateRange(1, 2);
+        if (searchChoice == 0) return;
+
+        System.out.println();
+        String searchValue = "";
+        if (searchChoice == 1){
+            System.out.print("Enter participant name: ");
+            searchValue = input.nextLine().trim();
+        } else {
+            System.out.print("Enter participant ID: ");
+            int idNum = validateInt(input);
+            input.nextLine();
+            searchValue = String.valueOf(idNum);
+        }
+
+        // search through the registration
+        boolean found = false;
+        ArrayList<String> eventList = registrations[catChoice][eventChoice];
+
+        for (int i = 0; i < eventList.size(); i++){
+            String participant = eventList.get(i);
+            String[] parts = participant.split("&");
+            String name = parts[0];
+            String id = parts[1];
+
+            // check if it matches
+            if (searchChoice == 1){
+                // searching by name
+                if (name.equalsIgnoreCase(searchValue)){
+                    eventList.remove(i);
+                    System.out.println("Successfully removed: " + name + " (ID: " + id + ")");
+                    System.out.println("From event: " + events[catChoice][eventChoice]);
+                    found = true;
+                    break;
+                }
+            } else {
+                // searching by ID
+                if (id.equals(searchValue)){
+                    eventList.remove(i);
+                    System.out.println("Successfully removed: " + name + " (ID: " + id + ")");
+                    System.out.println("From event: " + events[catChoice][eventChoice]);
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found){
+            System.out.println("Participant not found in this event.");
+        }
+        System.out.println();
+    } // end of cancel registration
 }
