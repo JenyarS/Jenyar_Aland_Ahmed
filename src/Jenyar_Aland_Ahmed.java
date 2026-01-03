@@ -61,7 +61,8 @@ public class Jenyar_Aland_Ahmed {
                 "0. Exit\n"
         );
         System.out.print("What would you like to do? ");
-        return input.nextInt();
+        return validateInt(input);
+        //return input.nextInt();
     } // end of menu
 
     public static void viewEvents(){
@@ -81,6 +82,22 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of viewEvents
 
+    // method to validate if an integer is input
+    public static int validateInt(Scanner input){
+        int tries = 3;
+        while(!input.hasNextInt()){
+            if (tries == 0){
+                System.out.println("Too many failed attempts.");
+                return 0;
+            }
+            System.out.println("Invalid input! Please enter a number.");
+            input.next();
+            System.out.print("Try again: ");
+            tries--;
+        }
+        return input.nextInt();
+    } // end of validateInt
+
     public static int validateRange(int min, int max){
         int num;
         boolean error = false;
@@ -93,7 +110,7 @@ public class Jenyar_Aland_Ahmed {
             if (error){
                 System.out.print("Invalid choice, try again: ");
             }
-            num = input.nextInt();
+            num = validateInt(input);
             error = true;
             tries--;
             System.out.println();
