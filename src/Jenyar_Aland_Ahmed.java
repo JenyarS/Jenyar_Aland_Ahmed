@@ -59,13 +59,13 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.print("Select a category: ");
 
-        int catChoice = validateRange(1, 3);
+        int catChoice = validateRange(1, 3) - 1;
         if (catChoice == -1) return;
 
         System.out.println();
         System.out.println("Current Events:");
         for (int i = 0; i < events[0].length; i++){
-            System.out.println((i+1) + ". " + events[catChoice-1][i]);
+            System.out.println((i+1) + ". " + events[catChoice][i]);
         }
         System.out.println();
     } // end of viewEvents
@@ -89,4 +89,21 @@ public class Jenyar_Aland_Ahmed {
         }while (num < min || num > max);
         return num;
     } // end of validateRange
+
+    public static void registration(){
+        for (int i = 0; i < category.length; i++){
+            System.out.println((i+1) + ". " + category[i]);
+        }
+        System.out.print("Select a category: ");
+        int catChoice = validateRange(1, 3) - 1;
+        if (catChoice == -1) return;
+
+        System.out.println();
+        for (int i = 0; i < events[0].length; i++){
+            System.out.println((i+1) + ". " + events[catChoice][i]);
+        }
+        System.out.println("Select an event:");
+        int eventChoice = validateRange(1, 4) - 1;
+        if (eventChoice == -1) return;
+    }
 }
