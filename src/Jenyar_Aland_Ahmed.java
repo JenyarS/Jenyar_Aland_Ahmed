@@ -123,6 +123,7 @@ public class Jenyar_Aland_Ahmed {
     } // end of validateRange
 
     public static void register(){
+        // display categories
         for (int i = 0; i < category.length; i++){
             System.out.println((i+1) + ". " + category[i]);
         }
@@ -130,6 +131,7 @@ public class Jenyar_Aland_Ahmed {
         int catChoice = validateRange(1, 3) - 1;
         if (catChoice == -1) return;
 
+        // display events
         System.out.println();
         for (int i = 0; i < events[0].length; i++){
             System.out.println((i+1) + ". " + events[catChoice][i]);
