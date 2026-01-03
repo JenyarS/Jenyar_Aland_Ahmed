@@ -48,6 +48,8 @@ public class Jenyar_Aland_Ahmed {
 
                 case 6 -> searchParticipant();
 
+                case 8 -> report();
+
                 default -> {
                     System.out.println("Invalid choice.");
                 }
@@ -153,6 +155,7 @@ public class Jenyar_Aland_Ahmed {
         // which can later be split for searching
         String combined = name + "-" + ID;
         registrations[catChoice][eventChoice].add(combined);
+        System.out.println();
     } // end of registrations
 
     // method to cancel registration
@@ -359,4 +362,32 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.println();
     } // end of search participant
+
+    // generates a report of popularity
+    public static void report(){
+        int mostCat = 0;
+        int catIndex = 0;
+        int mostEvent = 0;
+        int[] eventIndex = new int[2];
+        for (int i = 0; i < category.length; i++) {
+            int totCategory = 0;// tracking the total number of registrations in current category
+            for (int j = 0; j < events[i].length; j++) {
+                int totEvent = registrations[i][j].size();
+                totCategory += totEvent;
+                if (totEvent > mostEvent){
+                    mostEvent = totEvent;
+                    eventIndex[0] = i;
+                    eventIndex[1] = j;
+                }
+            }
+            if (totCategory > mostCat){
+                mostCat = totCategory;
+                catIndex = i;
+            }
+        }
+
+        System.out.println("The most popular category is '" + category[catIndex] + "' with " + mostCat + " participants.");
+        System.out.println("And the most popular event is '" + events[eventIndex[0]][eventIndex[1]] + "' with " + mostEvent + " participants." );
+        System.out.println();
+    } // end of report
 }
