@@ -59,11 +59,13 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.print("Select a category: ");
 
-        int catChoice = validateRange(1, 3) - 1;
+        int catChoice = validateRange(1, 3);
         if (catChoice == -1) return;
 
+        System.out.println();
+        System.out.println("Current Events:");
         for (int i = 0; i < events[0].length; i++){
-            System.out.println((i+1) + ". " + events[catChoice][i]);
+            System.out.println((i+1) + ". " + events[catChoice-1][i]);
         }
         System.out.println();
     } // end of viewEvents
