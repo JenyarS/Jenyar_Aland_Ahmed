@@ -42,6 +42,8 @@ public class Jenyar_Aland_Ahmed {
 
                 case 3 -> cancelRegistration();
 
+                case 4 -> displayParticipants();
+
                 default -> {
                     System.out.println("Choice is yet to be implemented");
                 }
@@ -224,4 +226,36 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.println();
     } // end of cancel registration
+
+    public static void displayParticipants(){
+        System.out.println("1. Display in ascending order");
+        System.out.println("2. Display in descending order");
+        System.out.println("How would you like the participants: ");
+        int choice = validateRange(1, 2);
+        if (choice == 0) return;
+
+        for (int cat = 0; cat < registrations.length; cat++){
+            System.out.println((cat+1) + ". " + category[cat]);
+            for (int event = 0; event < registrations[0].length; event++){
+                int counter = 1;
+                ArrayList<String> participants = sort(cat, event, choice);
+                System.out.println("    " + (cat+1) + "." + (event+1) + ". " + events[cat][event]);
+                for (String participant: participants){
+                    System.out.println("        " + (cat+1) + "." + (event+1) + "." + counter + ". " + participant);
+                    counter++;
+                }
+            }
+        }
+    } // end of displayParticipants
+
+    public static ArrayList<String> sort(int category, int event, int pattern){
+        // create a copy list of the names in the current event
+        ArrayList<String> participants = new ArrayList<>(registrations[category][event]);
+        if (pattern == 1){
+            Collections.sort(participants);
+        } else{
+            Collections.sort(participants, Collections.reverseOrder());
+        }
+        return participants;
+    } // end of sort
 }
