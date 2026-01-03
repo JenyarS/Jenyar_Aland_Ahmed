@@ -12,6 +12,7 @@ public class Jenyar_Aland_Ahmed {
     };
     // arraylist to store the participant information
     static ArrayList<String>[][] registrations = new ArrayList[3][4];
+    static ArrayList<String> latestregistration = new ArrayList<>();
 
     // we need this method to initialize the arraylist
     public static void initializeSystem(){
@@ -47,6 +48,8 @@ public class Jenyar_Aland_Ahmed {
                 case 5 -> displayStats();
 
                 case 6 -> searchParticipant();
+
+                case 7 -> latestRegistration();
 
                 default -> {
                     System.out.println("Invalid choice.");
@@ -153,6 +156,10 @@ public class Jenyar_Aland_Ahmed {
         // which can later be split for searching
         String combined = name + "&" + ID;
         registrations[catChoice][eventChoice].add(combined);
+
+        //these lines are added for case 7
+        latestregistration.add(name+" "+ID+" "+events[catChoice][eventChoice]);
+        System.out.println("Registration is completed");
     } // end of registrations
 
     // method to cancel registration
@@ -357,4 +364,15 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.println();
     } // end of search participant
+    // method to display the latest entries made first
+    public static void latestRegistration() {
+        System.out.println("~~~~~~ Latest Registration ~~~~~~");
+        if (latestregistration.isEmpty()){
+            System.out.println("registration is empty");
+        }else {
+            for (int i=latestregistration.size()-1;i>=0;i--){
+                System.out.println(latestregistration.get(i));
+            }
+        }
+    }
 }
