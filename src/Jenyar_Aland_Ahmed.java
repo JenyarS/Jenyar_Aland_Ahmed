@@ -88,16 +88,10 @@ public class Jenyar_Aland_Ahmed {
 
     // method to validate if an integer is input
     public static int validateInt(Scanner input){
-        int tries = 3;
         while(!input.hasNextInt()){
-            if (tries == 0){
-                System.out.println("Too many failed attempts.");
-                return 0;
-            }
             System.out.println("Invalid input! Please enter a number.");
             input.next();
             System.out.print("Try again: ");
-            tries--;
         }
         return input.nextInt();
     } // end of validateInt
