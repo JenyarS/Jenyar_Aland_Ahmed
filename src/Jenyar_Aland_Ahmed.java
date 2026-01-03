@@ -10,6 +10,18 @@ public class Jenyar_Aland_Ahmed {
             {"Colors of the Citadel", "Modern Kurdish Canvas", "Heritage Textile Showcase", "Landscapes of Spring"},
             {"Echoes of Nali", "Contemporary Kurdish Voices", "Legends of the Ancients", "The Poets' Circle"}
     };
+    // arraylist to store the participant information
+    static ArrayList<String>[][] registrations = new ArrayList[3][4];
+
+    // we need this method to initialize the arraylist
+    public static void initializeSystem(){
+        for (int i = 0; i < registrations.length; i++){ // categories
+            for (int j = 0; j < registrations[0].length; j++){ // events
+                // participants list
+                registrations[i][j] = new ArrayList<String>();
+            }
+        }
+    } // end of initializeSystem
 
     public static void main(String[] args){
         for (;;) {
