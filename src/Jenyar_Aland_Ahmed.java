@@ -164,7 +164,7 @@ public class Jenyar_Aland_Ahmed {
         registrations[catChoice][eventChoice].add(combined);
 
         //these lines are added for case 7
-        latestregistration.add(name+" "+ID+" "+events[catChoice][eventChoice]);
+        latestregistration.add("Name: " + name + ", ID: " + ID + ", Event: " + events[catChoice][eventChoice]);
         System.out.println("Registration is completed");
         System.out.println();
     } // end of registrations
