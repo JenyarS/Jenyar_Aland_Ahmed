@@ -61,6 +61,7 @@ public class Jenyar_Aland_Ahmed {
         }
     } // end of main
 
+    // displays the menu and returns the user choice
     public static int menu(){
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("~~~~~~ Event Registration ~~~~~~");
@@ -81,6 +82,7 @@ public class Jenyar_Aland_Ahmed {
         return validateInt(input);
     } // end of menu
 
+    // allows the user to view the current events by choosing category
     public static void viewEvents(){
         for (int i = 0; i < category.length; i++){
             System.out.println((i+1) + ". " + category[i]);
@@ -98,7 +100,8 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of viewEvents
 
-    // method to validate if an integer is input
+    // takes an input and validates if it is an integer
+    // preventing program crash if inputs doesnt match
     public static int validateInt(Scanner input){
         while(!input.hasNextInt()){
             System.out.println("Invalid input! Please enter a number.");
@@ -108,7 +111,9 @@ public class Jenyar_Aland_Ahmed {
         return input.nextInt();
     } // end of validateInt
 
-    // method to validate the input integer fits withing the acceptable range
+    // takes minimum and maximum values, and then gets an input
+    // then checks if the input fits in the range
+    // if not return -1 so we know its an error
     public static int validateRange(int min, int max){
         int num;
         int tries = 3;
@@ -133,6 +138,8 @@ public class Jenyar_Aland_Ahmed {
         return -1; // Return -1 for failure
     } // end of validateRange
 
+    // allows the user to register for events
+    // takes name and ID and saves it in an expandable arraylist together
     public static void register(){
         // display categories
         for (int i = 0; i < category.length; i++){
@@ -192,7 +199,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of registrations
 
-    // method to cancel registration
+    // allows users to cancel an existing registration
     public static void cancelRegistration(){
         for (int i = 0; i < category.length; i++){
             System.out.println((i+1) + ". " + category[i]);
@@ -244,7 +251,10 @@ public class Jenyar_Aland_Ahmed {
             if (searchChoice == 1){
                 // searching by name
                 if (name.equalsIgnoreCase(searchValue)){
+                    String combined = participant;
                     eventList.remove(i);
+                    // remove from tracking list
+                    participantEventCount.remove(combined);
                     System.out.println("Successfully removed: " + name + " (ID: " + id + ")");
                     System.out.println("From event: " + events[catChoice][eventChoice]);
                     found = true;
@@ -253,7 +263,10 @@ public class Jenyar_Aland_Ahmed {
             } else {
                 // searching by ID
                 if (id.equals(searchValue)){
+                    String combined = participant;
                     eventList.remove(i);
+                    // remove from tracking list
+                    participantEventCount.remove(combined);
                     System.out.println("Successfully removed: " + name + " (ID: " + id + ")");
                     System.out.println("From event: " + events[catChoice][eventChoice]);
                     found = true;
@@ -268,6 +281,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of cancel registration
 
+    // displays all participants currently registered per event
     public static void displayParticipants(){
         System.out.println("1. Display in ascending order");
         System.out.println("2. Display in descending order");
@@ -295,7 +309,8 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of displayParticipants
 
-    // sorting method
+    // takes the indexes for the current event list
+    // sorts inn ascending or descending order as per users wish
     public static ArrayList<String> sort(int category, int event, int pattern){
         // create a copy list of the names in the current event
         ArrayList<String> participants = new ArrayList<>(registrations[category][event]);
@@ -307,7 +322,7 @@ public class Jenyar_Aland_Ahmed {
         return participants;
     } // end of sort
 
-    // method to display stats
+    // displays the number of registrations for each category and each event
     public static void displayStats(){
         System.out.println("~~~~~~ Display Stats ~~~~~~");
         for (int i=0;i<category.length;i++){
@@ -323,7 +338,8 @@ public class Jenyar_Aland_Ahmed {
         }
     } // end of displayStats
 
-    // Can search by participant name or ID
+    // allows searching for a participant among all currently registered events
+    // can search by either name or ID
     public static void searchParticipant(){
         // choose how to search
         System.out.println("~~~~~~ Search for a Participant ~~~~~~");
@@ -401,7 +417,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of search participant
 
-    // generates a report of popularity
+    // generates a report showing most popular category and event
     public static void report(){
         System.out.println("~~~~~~ Popularity Report ~~~~~~");
         int mostCat = 0;
@@ -430,7 +446,7 @@ public class Jenyar_Aland_Ahmed {
         System.out.println();
     } // end of report
 
-    // method to display the latest entries made first
+    // displays the latest entries made first
     public static void latestRegistration() {
         System.out.println("~~~~~~ Latest Registrations ~~~~~~");
         if (latestregistration.isEmpty()){
