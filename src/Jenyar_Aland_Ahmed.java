@@ -27,6 +27,7 @@ public class Jenyar_Aland_Ahmed {
         initializeSystem();
         for (;;) {
             int choice = menu();
+            input.nextLine(); // consume newline
             System.out.println();
 
             switch (choice) {
@@ -36,6 +37,8 @@ public class Jenyar_Aland_Ahmed {
                 } // exit
 
                 case 1 -> viewEvents();
+
+                case 2 -> register();
 
                 default -> {
                     System.out.println("Choice is yet to be implemented");
@@ -62,7 +65,6 @@ public class Jenyar_Aland_Ahmed {
         );
         System.out.print("What would you like to do? ");
         return validateInt(input);
-        //return input.nextInt();
     } // end of menu
 
     public static void viewEvents(){
@@ -98,6 +100,7 @@ public class Jenyar_Aland_Ahmed {
         return input.nextInt();
     } // end of validateInt
 
+    // method to validate the input integer fits withing the acceptable range
     public static int validateRange(int min, int max){
         int num;
         boolean error = false;
@@ -111,6 +114,7 @@ public class Jenyar_Aland_Ahmed {
                 System.out.print("Invalid choice, try again: ");
             }
             num = validateInt(input);
+            input.nextLine(); // consume newline
             error = true;
             tries--;
             System.out.println();
@@ -118,7 +122,7 @@ public class Jenyar_Aland_Ahmed {
         return num;
     } // end of validateRange
 
-    public static void registration(){
+    public static void register(){
         for (int i = 0; i < category.length; i++){
             System.out.println((i+1) + ". " + category[i]);
         }
@@ -130,8 +134,18 @@ public class Jenyar_Aland_Ahmed {
         for (int i = 0; i < events[0].length; i++){
             System.out.println((i+1) + ". " + events[catChoice][i]);
         }
-        System.out.println("Select an event:");
+        System.out.print("Select an event: ");
         int eventChoice = validateRange(1, 4) - 1;
         if (eventChoice == -1) return;
+
+        System.out.println();
+        System.out.print("Enter the participants name: ");
+        String name = input.nextLine();
+        System.out.print("Enter the participants ID: ");
+        int ID = validateInt(input);
+        input.nextLine(); // consume newline
+
+        String combined = name + "&" + ID;
+        registrations[catChoice][eventChoice].add(combined);
     } // end of registrations
 }
