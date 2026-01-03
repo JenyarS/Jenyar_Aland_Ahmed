@@ -42,6 +42,10 @@ public class Jenyar_Aland_Ahmed {
 
                 case 3 -> cancelRegistration();
 
+
+                case 5 -> displaystats();
+
+
                 default -> {
                     System.out.println("Choice is yet to be implemented");
                 }
@@ -224,4 +228,18 @@ public class Jenyar_Aland_Ahmed {
         }
         System.out.println();
     } // end of cancel registration
+    // method to display stats
+    public static void displaystats(){
+        System.out.println("~~~~~~ display stats ~~~~~~");
+        for (int i=0;i<category.length;i++){
+            System.out.println("category: " + category[i]);
+            int totcategory=0;// tracking the total number of registrations in current category
+            for (int j=0;j<events[i].length;j++){
+                int totevent=registrations[i][j].size();
+                totcategory+=totevent;
+                System.out.println(events[i][j]+": " + totevent + " participants");
+            }
+            System.out.println("total for " + category[i] + ":" + totcategory);
+        }
+    }
 }
