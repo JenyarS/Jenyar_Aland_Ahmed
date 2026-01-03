@@ -259,7 +259,8 @@ public class Jenyar_Aland_Ahmed {
                 ArrayList<String> participants = sort(cat, event, choice);
                 System.out.println("    " + (cat+1) + "." + (event+1) + ". " + events[cat][event]);
                 for (String participant: participants){
-                    System.out.println("        " + (cat+1) + "." + (event+1) + "." + counter + ". " + participant);
+                    String[] parts = participant.split("-");
+                    System.out.println("        " + (cat+1) + "." + (event+1) + "." + counter + ". Name: " + parts[0] + ", ID: " + parts[1]);
                     counter++;
                 }
             }
