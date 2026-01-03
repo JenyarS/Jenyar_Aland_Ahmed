@@ -145,6 +145,8 @@ public class Jenyar_Aland_Ahmed {
         int ID = validateInt(input);
         input.nextLine(); // consume newline
 
+        // this saves the name and ID together as name&id
+        // which can later be split for searching
         String combined = name + "&" + ID;
         registrations[catChoice][eventChoice].add(combined);
     } // end of registrations
